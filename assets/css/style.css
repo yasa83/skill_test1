@@ -1,0 +1,15 @@
+.content_header {
+  border-bottom: 1px solid #E6E6E6;
+}
+
+.button {
+  margin-top: 36px;
+  width: 250px;
+}
+
+.content {
+  width: 600px;
+  border: solid thin;
+  padding: 0px 12px 6px 12px;
+  margin-bottom:36px;
+}
