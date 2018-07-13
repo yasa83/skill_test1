@@ -1,3 +1,56 @@
+<?php
+  // ここにDBに登録する処理を記述する
+   
+
+    //１　データベースに接続する処理
+    $dsn = 'mysql:dbname=skill_test1;host=localhost';
+    $user = 'root';
+    $password = '';
+    $dbh = new PDO($dsn, $user, $password);
+    $dbh->query('SET NAMES utf8');
+
+    // 呟かれたデータを受け取る
+    if(!empty($_POST)){
+    $title = htmlspecialchars($_POST['title']);
+    // $time = date('Y-m-d H:i:s');
+    $date = date('Y-m-d');
+    // $date = htmlspecialchars($_POST['date']);
+    $detail = htmlspecialchars($_POST['detail']);
+
+    // var_dump($_POST);exit();
+
+    //SQLに保存する
+    $sql = 'INSERT INTO `tasks`(`title`, `date`,`detail`) VALUES (?, ? ,?)';
+    $data[] =  $title;
+    $data[] =  $date;
+    $data[] = $detail;
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+    }
+
+
+
+
+    //データを取り出す
+    // $sql = 'SELECT * FROM `tasks` ORDER BY created DESC';
+    // $stmt = $dbh->prepare($sql);
+    // $stmt->execute();
+
+    // $comments = array();
+    // while (1) {
+        // $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+        // if($rec == false) {
+        // break;
+              // }
+    // $comments[] = $rec;
+              // }
+
+    $dbh = null;
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -16,7 +69,7 @@
         <form method="POST" action="">
           <div class="form-group">
             <label for="task">タスク</label>
-            <input name="" class="form-control">
+            <input name="title" class="form-control">
           </div>
           <div class="form-group">
             <label for="date">日程</label>
@@ -24,7 +77,7 @@
           </div>
           <div class="form-group">
             <label for="detail">詳細</label>
-            <textarea name="" class="form-control" rows="3"></textarea><br>
+            <textarea name="detail" class="form-control" rows="3"></textarea><br>
           </div>
           <input type="submit" class="btn btn-primary" value="投稿">
         </form>
