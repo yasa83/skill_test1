@@ -1,54 +1,3 @@
-<?php
-  // ここにDBに登録する処理を記述する
-   
-
-    //１　データベースに接続する処理
-    $dsn = 'mysql:dbname=skill_test1;host=localhost';
-    $user = 'root';
-    $password = '';
-    $dbh = new PDO($dsn, $user, $password);
-    $dbh->query('SET NAMES utf8');
-
-    // 呟かれたデータを受け取る
-    if(!empty($_POST)){
-    $title = htmlspecialchars($_POST['title']);
-    // $time = date('Y-m-d H:i:s');
-    $date = date('Y-m-d');
-    // $date = htmlspecialchars($_POST['date']);
-    $detail = htmlspecialchars($_POST['detail']);
-
-    // var_dump($_POST);exit();
-
-    //SQLに保存する
-    $sql = 'INSERT INTO `tasks`(`title`, `date`,`detail`) VALUES (?, ? ,?)';
-    $data[] =  $title;
-    $data[] =  $date;
-    $data[] = $detail;
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute($data);
-    }
-
-
-
-
-    //データを取り出す
-    // $sql = 'SELECT * FROM `tasks` ORDER BY created DESC';
-    // $stmt = $dbh->prepare($sql);
-    // $stmt->execute();
-
-    // $comments = array();
-    // while (1) {
-        // $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-        // if($rec == false) {
-        // break;
-              // }
-    // $comments[] = $rec;
-              // }
-
-    $dbh = null;
-
-?>
-
 
 
 <!DOCTYPE html>
@@ -65,8 +14,10 @@
     <div class="row">
       <div class="col-xs-8 col-xs-offset-2 thumbnail">
         <h2 class="text-center content_header">タスク追加</h2>
+         
 
-        <form method="POST" action="">
+
+        <form method="POST" action="schedule.php">
           <div class="form-group">
             <label for="task">タスク</label>
             <input name="title" class="form-control">
