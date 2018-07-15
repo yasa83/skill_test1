@@ -3,12 +3,12 @@
  if(!empty($_POST)){
     $title = htmlspecialchars($_POST['title']);
     // $time = date('Y-m-d H:i:s');
-    $date = date('Y-m-d');
+    $date = date('Y-m-d',strtotime($_POST['date']));
     // $date = htmlspecialchars($_POST['date']);
     $detail = htmlspecialchars($_POST['detail']);
 
     // var_dump($_POST);exit();
-    
+
   // ここにDBに登録する処理を記述する
    
 
@@ -35,7 +35,8 @@
 
 
     // データを取り出す
-    $sql = 'SELECT * FROM `tasks` ORDER BY created DESC';
+    // $sql = 'SELECT * FROM `tasks` ORDER BY created DESC';
+    $sql= 'SELECT * FROM `tasks`'; 
     $stmt = $dbh->prepare($sql);
     $stmt->execute();
 
@@ -76,8 +77,7 @@
         </div>
 
 
-          <?php var_dump( $comments);
-          exit();  ?>
+      
          
         <div class="col-xs-8">
           <?php foreach ($comments as $comment): ?>
@@ -98,7 +98,7 @@
             <h3>8月15日</h3>
             <div class="content">
               <h3 style="font-weight: bold;">明日映画に行く</h3>
-              <h4>ノブさんと映画見に行くことになったが、気まずいら事前に誰かを誘いたい。太一にはもう聞いて見たが断られた。でも二人で行きたくないから必死に誰かを誘いたい</h4>
+              <h4>ノブさんと映画見に行くことになったが、気まずいから事前に誰かを誘いたい。太一にはもう聞いて見たが断られた。でも二人で行きたくないから必死に誰かを誘いたい</h4>
             </div>
           </div>
         </div>
