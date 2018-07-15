@@ -24,7 +24,7 @@
           </div>
           <div class="form-group">
             <label for="date">日程</label>
-            <input type="date" name="" class="form-control">
+            <input type="date" name="date" class="form-control">
           </div>
           <div class="form-group">
             <label for="detail">詳細</label>
