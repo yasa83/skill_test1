@@ -1,3 +1,39 @@
+<?php
+    //１　データベースに接続する処理
+    $dsn = 'mysql:dbname=skill_test1;host=localhost';
+    $user = 'root';
+    $password = '';
+    $dbh = new PDO($dsn, $user, $password);
+    $dbh->query('SET NAMES utf8');
+
+
+ if(!empty($_POST)){
+    $title = htmlspecialchars($_POST['title']);
+    // $time = date('Y-m-d H:i:s');
+    $date = date('Y-m-d',strtotime($_POST['date']));
+    // $date = htmlspecialchars($_POST['date']);
+    $detail = htmlspecialchars($_POST['detail']);
+
+    // var_dump($_POST);exit();
+
+
+    //SQLに保存する
+    $sql = 'INSERT INTO `tasks`(`title`, `date`,`detail`) VALUES (?, ? ,?)';
+    $data[] =  $title;
+    $data[] =  $date;
+    $data[] = $detail;
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+
+    header("Location: schedule.php");
+    exit();
+}
+
+$dbh = null;
+
+    ?>
+
+
 
 
 <!DOCTYPE html>
@@ -17,7 +53,7 @@
          
 
 
-        <form method="POST" action="schedule.php">
+        <form method="POST" action="">
           <div class="form-group">
             <label for="task">タスク</label>
             <input name="title" class="form-control">
