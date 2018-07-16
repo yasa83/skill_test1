@@ -8,27 +8,6 @@
 
 
 
-
- if(!empty($_POST)){
-    $title = htmlspecialchars($_POST['title']);
-    // $time = date('Y-m-d H:i:s');
-    $date = date('Y-m-d',strtotime($_POST['date']));
-    // $date = htmlspecialchars($_POST['date']);
-    $detail = htmlspecialchars($_POST['detail']);
-
-    // var_dump($_POST);exit();
-
-
-    //SQLに保存する
-    $sql = 'INSERT INTO `tasks`(`title`, `date`,`detail`) VALUES (?, ? ,?)';
-    $data[] =  $title;
-    $data[] =  $date;
-    $data[] = $detail;
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute($data);
-}
-
-
     // SQLから取り出す
     $sql= 'SELECT * FROM `tasks` ORDER BY date ASC' ; 
     $stmt = $dbh->prepare($sql);
