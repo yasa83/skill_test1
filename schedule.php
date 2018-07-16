@@ -1,4 +1,13 @@
 <?php
+    //１　データベースに接続する処理
+    $dsn = 'mysql:dbname=skill_test1;host=localhost';
+    $user = 'root';
+    $password = '';
+    $dbh = new PDO($dsn, $user, $password);
+    $dbh->query('SET NAMES utf8');
+
+
+
 
  if(!empty($_POST)){
     $title = htmlspecialchars($_POST['title']);
@@ -9,18 +18,6 @@
 
     // var_dump($_POST);exit();
 
-  // ここにDBに登録する処理を記述する
-   
-
-    //１　データベースに接続する処理
-    $dsn = 'mysql:dbname=skill_test1;host=localhost';
-    $user = 'root';
-    $password = '';
-    $dbh = new PDO($dsn, $user, $password);
-    $dbh->query('SET NAMES utf8');
-
-    // 呟かれたデータを受け取る
-
 
     //SQLに保存する
     $sql = 'INSERT INTO `tasks`(`title`, `date`,`detail`) VALUES (?, ? ,?)';
@@ -29,14 +26,11 @@
     $data[] = $detail;
     $stmt = $dbh->prepare($sql);
     $stmt->execute($data);
-    }
+}
 
 
-
-
-    // データを取り出す
-    // $sql = 'SELECT * FROM `tasks` ORDER BY created DESC';
-    $sql= 'SELECT * FROM `tasks`'; 
+    // SQLから取り出す
+    $sql= 'SELECT * FROM `tasks` ORDER BY date ASC' ; 
     $stmt = $dbh->prepare($sql);
     $stmt->execute();
 
@@ -49,7 +43,11 @@
     $comments[] = $rec;
               }
 
+              
+
     $dbh = null;
+
+
 
 ?>
 
@@ -88,8 +86,10 @@
               <h3 style="font-weight: bold"><?php echo $comment['title']; ?></h3>
               <h4><?php echo $comment['detail']; ?></h4>
               
+              <a href="delete.php?id=<?php echo $comment["id"]; ?>" class="btn btn-danger" style="color: white">削除</a>
             </div>
           </div>
+
            <?php endforeach; ?>
             
 
