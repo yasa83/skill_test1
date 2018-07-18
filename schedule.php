@@ -66,6 +66,7 @@
               <h4><?php echo $comment['detail']; ?></h4>
               
               <a href="delete.php?id=<?php echo $comment["id"]; ?>" class="btn btn-danger" style="color: white">削除</a>
+              <a href="edit.php?id=<?php echo $comment["id"]; ?>" class="btn btn-success" style="color: white">編集</a>
             </div>
           </div>
 
