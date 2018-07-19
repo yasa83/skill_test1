@@ -46,7 +46,7 @@ $dbh = null;
           <div class="form-group">
           <div class="input-group">
              <label for="task">タスク</label>
-            <input type="text" name="detail" class="form-control" id="validate-text" placeholder="detail" required value="<?php echo $comment['detail'] ?>">
+            <input type="text" name="title" class="form-control" id="validate-text" placeholder="title" required value="<?php echo $comment['title'] ?>">
             <input type="hidden" name="id" value="<?php echo $comment['id'] ?>">
             
           </div>
